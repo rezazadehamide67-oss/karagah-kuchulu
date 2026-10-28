@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#6c55d9">
+<meta name="description" content="بازی شاد و آفلاین هوش و یادگیری برای کلاس اول">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<title>کارآگاه کوچولو</title>
+<style>
+:root{--purple:#6c55d9;--purple2:#8978f0;--ink:#292447;--muted:#716d88;--bg:#f6f4ff;--white:#fff;--green:#168957;--pink:#ffdeeb;--yellow:#fff0b5;--blue:#dff2ff}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#f2efff,#fff8fc 60%,#f2f8ff);font-family:Tahoma,"Arial",sans-serif;color:var(--ink);min-height:100vh}
+button{font:inherit;cursor:pointer;border:0} .app{max-width:620px;margin:auto;padding:18px 15px 30px}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:4px 0 18px}
+.brand{display:flex;align-items:center;gap:10px}.logo{width:54px;height:54px;border-radius:18px;background:#fff;box-shadow:0 5px 16px #34237b18;display:grid;place-items:center;font-size:31px}
+h1{font-size:22px;margin:0 0 4px}.subtitle{font-size:12px;color:var(--muted)}
+.score{background:var(--yellow);border-radius:16px;padding:10px 12px;font-weight:bold;white-space:nowrap}
+.panel{background:#ffffffed;border:1px solid #e9e4ff;border-radius:26px;padding:20px;box-shadow:0 10px 30px #463b8110;margin-bottom:14px}
+.hero{background:linear-gradient(135deg,#6c55d9,#a58df7);color:white;position:relative;overflow:hidden;padding:23px}.hero h2{font-size:22px;margin:0 0 8px}.hero p{line-height:1.9;margin:0 0 17px;font-size:14px}.hero .mascot{font-size:62px;position:absolute;left:13px;bottom:10px;opacity:.95}
+.primary{background:var(--purple);color:white;border-radius:16px;padding:14px 18px;font-weight:bold;width:100%;box-shadow:0 5px 0 #4c38b5}.hero .primary{background:white;color:#5945c4;box-shadow:none;position:relative;z-index:1;width:auto;min-width:160px}
+.section-title{font-size:17px;margin:0 0 12px}.categories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.category{border-radius:19px;padding:15px 12px;text-align:right;min-height:100px;border:2px solid transparent;color:var(--ink);display:flex;flex-direction:column;gap:8px;justify-content:center}.category .emoji{font-size:28px}.category b{font-size:15px}.category small{font-size:12px;color:#615b78}.cat1{background:#e5f5ff}.cat2{background:#fff0f6}.cat3{background:#fff4ce}.cat4{background:#e4f8e9}
+.category:active,.option:active{transform:scale(.985)}
+.progress{display:flex;gap:5px;margin:12px 0 18px}.progress span{height:7px;flex:1;border-radius:99px;background:#e9e6f5}.progress span.done{background:#31b77b}
+.question-card{text-align:center;background:linear-gradient(160deg,#f0ecff,#eef9ff);border-radius:22px;padding:18px 12px;margin-bottom:17px}
+.kicker{font-size:12px;color:#6d5bc4;font-weight:bold}.question{font-size:20px;line-height:1.8;margin:10px 0}.picture{font-size:44px;letter-spacing:3px;line-height:1.6;overflow-wrap:anywhere}
+.options{display:grid;gap:10px}.option{background:white;border:2px solid #e6e2f3;border-radius:17px;padding:14px;text-align:right;font-weight:bold;color:var(--ink);min-height:54px}.option.correct{border-color:#36b879;background:#e5faef}.option.wrong{border-color:#ff8a9b;background:#fff0f2}
+.feedback{margin:14px 0 0;padding:13px;border-radius:15px;background:#f2efff;line-height:1.8;font-weight:bold}
+.secondary{background:#eeeaff;color:#5140b3;border-radius:15px;padding:12px 15px;font-weight:bold;width:100%;margin-top:10px}
+.back{background:transparent;color:#6a58c8;padding:7px 0;margin-bottom:10px;font-weight:bold}
+.hidden{display:none!important}.footer{text-align:center;color:#8b86a0;font-size:11px;line-height:1.9;margin:15px 0}
+.result{text-align:center}.result .big{font-size:64px}.result h2{font-size:23px}
+@media(min-width:500px){.app{padding-top:26px}.panel{padding:24px}.hero .mascot{font-size:78px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+ <div class="brand"><div class="logo">🕵️</div><div><h1>کارآگاه کوچولو</h1><div class="subtitle">بازی فکر و یادگیری · کلاس اول</div></div></div>
+ <div class="score">⭐ <span id="score">۰</span></div>
+</header>
+<main id="home">
+ <section class="panel hero"><h2>آماده‌ای معما حل کنی؟</h2><p>بازی کن، فکر کن و ستاره بگیر!<br>هر روز یک کارآگاه باهوش‌تر شو.</p><button class="primary" id="start">شروع ماجراجویی 🚀</button><div class="mascot">🧠</div></section>
+ <section class="panel"><h3 class="section-title">یک بازی انتخاب کن</h3><div class="categories">
+  <button class="category cat1" data-cat="logic"><span class="emoji">🔍</span><b>هوش و الگوها</b><small>پیدا کردن جواب درست</small></button>
+  <button class="category cat2" data-cat="numbers"><span class="emoji">🔢</span><b>دنیای اعداد</b><small>شمارش و ترتیب</small></button>
+  <button class="category cat3" data-cat="letters"><span class="emoji">🔤</span><b>حروف فارسی</b><small>آشنایی با حروف</small></button>
+  <button class="category cat4" data-cat="colors"><span class="emoji">🎨</span><b>رنگ و شکل</b><small>دقت و مشاهده</small></button>
+ </div></section>
+ <section class="panel"><h3 class="section-title">🏆 کارنامه کارآگاه</h3><div>بیشترین ستاره‌ها: <b id="best">۰</b></div><div class="subtitle" style="margin-top:8px">امتیازها روی همین گوشی ذخیره می‌شوند.</div><button class="secondary" id="reset">شروع دوباره امتیازها</button></section>
+</main>
+<main id="game" class="hidden">
+ <button class="back" id="back">← برگشت به خانه</button>
+ <section class="panel">
+  <div style="display:flex;justify-content:space-between;align-items:center"><b id="gameTitle">مرحله بازی</b><span id="count" class="subtitle"></span></div>
+  <div class="progress" id="progress"></div>
+  <div class="question-card"><div class="kicker" id="kicker">کارآگاه کوچولو، فکر کن!</div><div class="question" id="question"></div><div class="picture" id="picture"></div></div>
+  <div class="options" id="options"></div>
+  <div id="feedback" class="feedback hidden" aria-live="polite"></div>
+  <button id="next" class="primary hidden" style="margin-top:14px">سؤال بعدی ←</button>
+ </section>
+</main>
+<main id="result" class="hidden"><section class="panel result"><div class="big" id="resultEmoji">🏆</div><h2 id="resultTitle">آفرین!</h2><p id="resultText"></p><button class="primary" id="again">دوباره بازی کن 🔄</button><button class="secondary" id="homeBtn">بازگشت به خانه</button></section></main>
+<div class="footer">برای یادگیری شاد کودکان کلاس اول<br>نسخه قابل اجرا به‌صورت آفلاین پس از بارگذاری اولیه</div>
+</div>
+<script>
+const data={
+ logic:{title:"هوش و الگوها",items:[
+ {q:"جای علامت سؤال چه رنگی است؟",p:"🔴 🔵 🔴 🔵 ❓",o:["قرمز","آبی","زرد"],a:0,h:"رنگ‌ها یکی در میان تکرار می‌شوند."},
+ {q:"کدام شکل با بقیه فرق دارد؟",p:"🍎 🍎 🍌 🍎",o:["سیب","موز","سیب قرمز"],a:1,h:"سه تا سیب داریم و یک موز."},
+ {q:"کدام حیوان بعدی است؟",p:"🐱 🐶 🐱 🐶 ❓",o:["گربه 🐱","سگ 🐶","ماهی 🐟"],a:0,h:"گربه و سگ به نوبت می‌آیند."},
+ {q:"کدام چیز برای باران مناسب‌تر است؟",p:"🌧️ ☔ 🌧️ ❓",o:["عینک آفتابی 🕶️","چتر ☔","توپ ⚽"],a:1,h:"چتر در روز بارانی به ما کمک می‌کند."},
+ {q:"کدام شکل گوشه ندارد؟",p:"🔺  🟦  ⚪",o:["مثلث 🔺","مربع 🟦","دایره ⚪"],a:2,h:"دایره گوشه ندارد."}]},
+ numbers:{title:"دنیای اعداد",items:[
+ {q:"چند سیب می‌بینی؟",p:"🍎 🍎 🍎",o:["۲ تا","۳ تا","۴ تا"],a:1,h:"سیب‌ها را یکی‌یکی بشمار."},
+ {q:"عدد بعدی کدام است؟",p:"۱، ۲، ۳، ❓",o:["۴","۵","۶"],a:0,h:"بعد از سه، چهار می‌آید."},
+ {q:"کدام عدد بزرگ‌تر است؟",p:"۳  یا  ۵",o:["۳","۵","هر دو برابرند"],a:1,h:"پنج از سه بزرگ‌تر است."},
+ {q:"دو توپ داریم و یک توپ دیگر می‌آید. چند توپ داریم؟",p:"⚽ ⚽ + ⚽",o:["۲ توپ","۳ توپ","۴ توپ"],a:1,h:"دو تا و یکی دیگر می‌شود سه تا."},
+ {q:"کدام عدد بین ۲ و ۴ است؟",p:"۲  ❓  ۴",o:["۱","۳","۵"],a:1,h:"عدد بین دو و چهار، سه است."}]},
+ letters:{title:"حروف فارسی",items:[
+ {q:"کدام حرف «ب» است؟",p:"",o:["ب","پ","ت"],a:0,h:"حرف ب یک نقطه در پایین دارد."},
+ {q:"کدام حرف بعد از «الف» می‌آید؟",p:"ا، ❓",o:["ب","ج","د"],a:0,h:"بعد از الف، ب می‌آید."},
+ {q:"کلمه «بابا» با کدام حرف شروع می‌شود؟",p:"👨",o:["م","ب","س"],a:1,h:"بابا با حرف ب شروع می‌شود."},
+ {q:"کدام حرف نقطه ندارد؟",p:"",o:["ا","ب","پ"],a:0,h:"الف نقطه ندارد."},
+ {q:"کدام کلمه با «م» شروع می‌شود؟",p:"",o:["ماه 🌙","سیب 🍎","توپ ⚽"],a:0,h:"ماه با حرف م شروع می‌شود."}]},
+ colors:{title:"رنگ و شکل",items:[
+ {q:"کدام چیز زرد است؟",p:"",o:["🍌","🍇","🥒"],a:0,h:"موز معمولاً زرد است."},
+ {q:"کدام شکل گرد است؟",p:"",o:["🔺","⚪","🟦"],a:1,h:"دایره گرد است."},
+ {q:"کدام رنگ از ترکیب قرمز و زرد به دست می‌آید؟",p:"🔴 + 🟡",o:["سبز","نارنجی","آبی"],a:1,h:"قرمز و زرد، نارنجی می‌سازند."},
+ {q:"کدام شکل سه گوشه دارد؟",p:"",o:["دایره ⚪","مربع 🟦","مثلث 🔺"],a:2,h:"مثلث سه گوشه دارد."},
+ {q:"کدام دو چیز هم‌رنگ‌اند؟",p:"🍓 🥕 🍓",o:["توت‌فرنگی و هویج","دو توت‌فرنگی","هویج و موز"],a:1,h:"دو توت‌فرنگی قرمز هستند."}]}
+};
+const fa=n=>String(n).replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d]);
+let category="logic",index=0,correct=0,items=[];
+const $=id=>document.getElementById(id);
+let score=Number(localStorage.getItem("kk_score")||0),best=Number(localStorage.getItem("kk_best")||0);
+function updateScore(){$("score").textContent=fa(score);$("best").textContent=fa(best)}
+function show(which){["home","game","result"].forEach(x=>$(x).classList.toggle("hidden",x!==which))}
+function begin(cat="logic"){category=cat;items=data[cat].items;index=0;correct=0;$("gameTitle").textContent=data[cat].title;show("game");render()}
+function render(){
+ const it=items[index];$("count").textContent=fa(index+1)+" از "+fa(items.length);
+ $("progress").innerHTML=items.map((_,i)=>`<span class="${i<index?"done":""}"></span>`).join("");
+ $("question").textContent=it.q;$("picture").textContent=it.p||"💡";$("feedback").classList.add("hidden");$("next").classList.add("hidden");$("options").innerHTML="";
+ it.o.forEach((opt,i)=>{const b=document.createElement("button");b.className="option";b.textContent=opt;b.onclick=()=>answer(i,b);$("options").appendChild(b)})
+}
+function answer(i,btn){const it=items[index];[...$("options").children].forEach((b,j)=>{b.disabled=true;if(j===it.a)b.classList.add("correct")});if(i===it.a){correct++;score++;best=Math.max(best,score);localStorage.setItem("kk_score",score);localStorage.setItem("kk_best",best);updateScore();$("feedback").textContent="آفرین! جواب درست است! 🌟 "+it.h}else{btn.classList.add("wrong");$("feedback").textContent="تلاش خوبی بود! 😊 جواب درست: "+it.o[it.a]+". "+it.h}$("feedback").classList.remove("hidden");$("next").classList.remove("hidden");$("next").textContent=index===items.length-1?"دیدن نتیجه 🏆":"سؤال بعدی ←"}
+function finish(){show("result");$("resultEmoji").textContent=correct===items.length?"🏆":correct>=3?"🌟":"🧠";$("resultTitle").textContent=correct===items.length?"فوق‌العاده بود!":"آفرین به تلاش تو!";$("resultText").textContent=`از ${fa(items.length)} سؤال، ${fa(correct)} پاسخ درست دادی. هر بار بازی کنی چیز تازه‌ای یاد می‌گیری!`}
+$("start").onclick=()=>begin("logic");document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>begin(b.dataset.cat));$("back").onclick=()=>show("home");$("next").onclick=()=>{if(index<items.length-1){index++;render()}else finish()};$("again").onclick=()=>begin(category);$("homeBtn").onclick=()=>show("home");$("reset").onclick=()=>{if(confirm("امتیازهای ذخیره‌شده پاک شوند؟")){score=0;best=0;localStorage.removeItem("kk_score");localStorage.removeItem("kk_best");updateScore()}};updateScore();
+if("serviceWorker" in navigator && location.protocol!=="file:"){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
+</script>
+</body></html>
